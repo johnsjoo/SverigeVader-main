@@ -1,0 +1,100 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<head>
+<link rel="stylesheet" href="~/css/testStyle.css" />
+</head>
+<body>
+
+
+    <div class=" text-center">
+
+        <h1 style="cursor: pointer" id="flip">Sverigeväder</h1>
+        <div id="panel" style="display:none">
+            <form method="get">
+                <select asp-for="City">
+                    <option>Göteborg</option>
+                    <option>Stockholm</option>
+                    <option>Sundsvall</option>
+                    <option>Kiruna</option>s
+                    <option>Malmö</option>
+                    <option>Nacka</option>
+                </select>
+
+                <button type="submit" class="btn btn-dark">Hämta</button>
+            </form>
+        </div>
+
+
+        <h1 style="cursor: pointer" id="flip1">Sök</h1>
+        <div id="panel1" style="display:none">
+            <form method="get">
+                <div class="form-group">
+                    <input asp-for="City" />
+                    <button type="submit" class="btn btn-dark" >Hämta</button>
+                </div>
+            </form>
+        </div>
+
+
+        <h1 style="cursor: pointer" id="flip2">Knappar</h1>
+        <div id="panel2" style="display:none">
+
+            <a class="btn btn-dark" href="?City=Göteborg">Göteborg</a>
+            <a class="btn btn-dark" href="?City=Stockholm">Stockholm</a>
+            <a class="btn btn-dark" href="?City=Sundsvall">Sundvall</a>
+            <a class="btn btn-dark" href="?City=Kiruna">Kiruna</a>
+            <a class="btn btn-dark" href="?City=Malmö">Malmö</a>
+            <a class="btn btn-dark" href="?City=Nacka">Nacka</a>
+
+        </div>
+
+        <h3 style="cursor: pointer" id="flip3" >Medeltemperatur</h3>
+        <div id="panel3">
+
+            @if (Model.City is not null)
+        {
+            <component type="typeof(Components.Cities)" render-mode="Static" param-city='$"{Model.City}"' />
+        }
+            <component type="typeof(Components.AvgTemp)" render-mode="Static" />
+        </div>
+        </div>
+    
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideToggle("slow");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#flip1").click(function () {
+                $("#panel1").slideToggle("slow");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#flip2").click(function () {
+                $("#panel2").slideToggle("slow");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#flip3").click(function () {
+                $("#panel3").slideToggle("slow");
+            });
+        });
+    </script>
+
+
+
+</body>
+

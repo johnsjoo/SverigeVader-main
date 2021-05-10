@@ -1,0 +1,47 @@
+﻿@inject Services.IDAL TempData
+
+<body>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            
+            <table>
+                <tr>
+                    <th>Stad</th>
+                    <th>MedelTemp</th>
+                </tr>
+                @foreach (var avg in tempavg)
+                {
+                    <tr>
+                        <td>@avg.Key</td>
+                        <td>@avg.Average(x => x.Values.Temp)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+@code {
+
+    [Parameter]
+    public IEnumerable<IGrouping<string, Models.Measurement>> tempavg { get; set; }
+
+    protected override void OnInitialized()
+    {
+
+
+        var AvgTempPerCity = TempData.GetWeatherData()
+        .ToList();
+
+
+        tempavg = AvgTempPerCity.GroupBy(x => x.City);
+
+
+    }
+}
+

@@ -1,0 +1,24 @@
+﻿<h3>CityWeather</h3>
+
+@inject Services.IDAL WeatherData
+
+<table>
+    <tr><th colspan="3">@City</th></tr>
+    <tr><th>Datum</th><th>Temperatur</th><th>Luftfuktighet</th></tr>
+
+    @foreach (var measurement in WeatherData.GetWeatherData().Where(x=>x.City == City))
+    {
+        <tr>
+            <td>@measurement.Date</td>
+            <td>@measurement.Values.Temp</td>
+            <td>@measurement.Values.Relativehumidity</td>
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter]
+    public string City { get; set; }
+
+
+}

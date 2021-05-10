@@ -1,0 +1,13 @@
+﻿<h3>@MinText : @counter</h3>
+
+@code {
+    [Parameter]
+    public string MinText { get; set; }
+
+    static int counter = 0;
+
+    protected override void OnInitialized()
+    {
+        counter++;
+    }
+}

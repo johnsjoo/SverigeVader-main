@@ -1,0 +1,43 @@
+﻿@inject Services.IDAL TempData
+
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table>
+            <tr>
+                <th>Stad</th>
+                <th>Datum</th>
+                <th>Temp</th>
+                <th>Fuktighet</th>
+                <th>Vind</th>
+                <th>Beskrivning</th>
+                <th>Moln</th>
+                <th>Uv</th>
+                <th>Vindriktning</th>
+                <th>Uppskattad Temp</th>
+            </tr>
+
+            @foreach (var measurement in TempData.GetWeatherData().Where(x => x.City.ToUpper() == city.ToUpper()))
+            {
+                <tr>
+                    <td>@measurement.City</td>
+                    <td>@measurement.Date</td>
+                    <td>@measurement.Values.Temp</td>
+                    <td>@measurement.Values.Relativehumidity</td>
+                    <td>@measurement.Values.WindSpeed</td>
+                    <td>@measurement.Values.Description</td>
+                    <td>@measurement.Values.Cloud</td>
+                    <td>@measurement.Values.Uv</td>
+                    <td>@measurement.Values.Wind_Dir grader</td>
+                    <td>@measurement.Values.App_Temp grader (Celsius)</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+    @code {
+        [Parameter]
+        public string city { get; set; }
+    }
